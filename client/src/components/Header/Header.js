@@ -24,7 +24,7 @@ const Header = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 {status ? <><Nav className="mr-auto">
-                    <Nav.Link to={`/home/${localStorage.getItem('firstName')}`} as={Link}>
+                    <Nav.Link to='/AccountDetails' as={Link}>
                         Home
                     </Nav.Link>
                     <NavDropdown title="Actions" id="basic-nav-dropdown">
