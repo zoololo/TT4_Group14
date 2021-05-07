@@ -6,6 +6,8 @@ import Login from './Login/Login';
 import addTransaction from '../addTransaction'
 import Footer from './Footer/Footer';
 import PrivateRoute from './PrivateRoute';
+import TransactionHist from './TransactionHist/TransactionHist';
+
 
 function App() {
   return (
@@ -21,6 +23,7 @@ function App() {
           <Redirect to="/LoginPage" />
         </Route>
         <Route exact path="/addTransaction" component={addTransaction} />
+        <Route exact path="/transactionHist" component={TransactionHist} />
         {/* Add Private routes for all pages only accessible after login */}
         <PrivateRoute exact path="/" />
         <PrivateRoute exact path="/" />
