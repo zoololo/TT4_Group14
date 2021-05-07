@@ -4,17 +4,13 @@ class addTransaction extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            // To be posted when transaction added
-            // custID: 14,
-            // accountKey: 'g1la0msi-ennf-t692-winw-b1h2utx82p2',
-
             // Uncomment and replace above when routing complete
-            custID: localStorage.getItem('custID'),
+            custID: parseInt(localStorage.getItem('custID')),
             accountKey: localStorage.getItem('accountKey'),
             
             // To be filled in by user
-            payeeID: '',
-            amount: '',
+            payeeID: NaN,
+            amount: NaN,
             eGift: false,
             message: ''
         };
@@ -23,49 +19,59 @@ class addTransaction extends React.Component{
         this.handleChange = this.handleChange.bind(this);
     }
 
+    // Prepares string for popup notifying result of transaction
     parse(response){
         if (typeof response['message'] !== "undefined"){
             return (response['message'] + `. ${this.state.amount} SGD was successfully transferred to Payee ID ${this.state.payeeID}.`);
         } else {
-            var errorCode = response['statusCode'].toString()
-            if (errorCode == 400){
-                if (this.state.payeeID != 22) {
+            var errorCode = response['statusCode']
+            if (errorCode === 400){
+                if (parseInt(this.state.payeeID) !== 22) {
                     return ("Please only use 22 as Payee ID.");
                 }
+            } else if (typeof errorCode !== "undefined") {
+                return ("Error " + errorCode.toString() + ": " + response['body']);
             } else {
-                return ("Error " + errorCode + ": " + response['body']);
+                return ("Request timed out. Please try again.");
             }
         }
     }
 
+    // POST the transaction API
     create(e) {
         e.preventDefault();
-
-        fetch("https://ipllrj2mq8.execute-api.ap-southeast-1.amazonaws.com/techtrek/transactions/add",{
-            "method": "POST",
-            "headers": {
-                'x-api-key': "ykOwd1IKUR3bX1I7O3yWx6QomMSqTOrG2cKUdzhg"
-            },
-            "body": JSON.stringify({
-                custID: this.state.custID,
-                accountKey: this.state.accountKey,
-                payeeID: this.state.payeeID,
-                amount: this.state.amount,
-                eGift: this.state.eGift,
-                message: this.state.message
+        if (isNaN(this.state.payeeID)){
+            alert("Please enter a payeeID.");
+        } else if (isNaN(this.state.amount)){
+            alert("Please enter an amount to transfer.");
+        } else if (this.state.amount * 100 % 1 !== 0) {
+            alert("Please enter a valid amount. (smallest denomination of 1 cent)")
+        } else{
+            fetch("https://ipllrj2mq8.execute-api.ap-southeast-1.amazonaws.com/techtrek/transactions/add",{
+                "method": "POST",
+                "headers": {
+                    'x-api-key': "ykOwd1IKUR3bX1I7O3yWx6QomMSqTOrG2cKUdzhg"
+                },
+                "body": JSON.stringify({
+                    custID: this.state.custID,
+                    accountKey: this.state.accountKey,
+                    payeeID: this.state.payeeID,
+                    amount: this.state.amount,
+                    eGift: this.state.eGift,
+                    message: this.state.message
+                })
             })
-        })
-        .then(response => response.json())
-        // TODO: Display success message, maybe redirect to homepage
-        .then(response => {
-            window.alert(this.parse(response))
-        })
-        // TODO: Display error, do not redirect
-        .catch(err => {
-            console.log(err);
-        });
+            .then(response => response.json())
+            .then(response => {
+                window.alert(this.parse(response))
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        }
     }
 
+    // Update state value based on field entries
     handleChange(changeObject){
         this.setState(changeObject)
     }
@@ -88,7 +94,7 @@ class addTransaction extends React.Component{
                                     className="form-control"
                                     value={this.state.name}
                                     onChange={(e) => this.handleChange({payeeID: parseInt(e.target.value)})}
-                                    required
+                                    required="required"
                                 />
                             </label>
                             <label htmlFor="amount">
@@ -100,7 +106,7 @@ class addTransaction extends React.Component{
                                     className="form-control"
                                     value={this.state.name}
                                     onChange={(e) => this.handleChange({amount: parseFloat(e.target.value)})}
-                                    required
+                                    required="required"
                                 />
                             </label>
                             <label htmlFor="gift">
