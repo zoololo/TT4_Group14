@@ -10,8 +10,11 @@ view transaction hist
 view balances
 
 # roles
-Login - Cheng
+Cheng - Login
 Khai - view transaction
+Khom - view account balance
+Roy - navbar
+Yangwu - add transactions
 
 # api call
 

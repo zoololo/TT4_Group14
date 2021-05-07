@@ -1,43 +1,41 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 class addTransaction extends React.Component{
     constructor(props){
         super(props);
         this.state = {
             // To be posted when transaction added
-            "custID": '',
-            "accountKey": '',
+            // custID: 14,
+            // accountKey: 'g1la0msi-ennf-t692-winw-b1h2utx82p2',
+
+            // Uncomment and replace above when routing complete
+            custID: localStorage.getItem('custID'),
+            accountKey: localStorage.getItem('accountKey'),
+            
             // To be filled in by user
-            "payeeID": '',
-            "amount": '',
-            "eGift": false,
-            "message": ''
+            payeeID: '',
+            amount: '',
+            eGift: false,
+            message: ''
         };
         
         this.create = this.create.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
-    // Retrieve the user's `custID` and `accountKey`, given userName, Pass
-    componentDidMount(){
-        fetch("https://ipllrj2mq8.execute-api.ap-southeast-1.amazonaws.com/techtrek/login",{
-            "method": "POST",
-            "headers": {
-                'x-api-key': "ykOwd1IKUR3bX1I7O3yWx6QomMSqTOrG2cKUdzhg"
-            },
-            "body": {
-                "userName": "Group14",
-                "accountKey": "BgQ%o_rF0$Fkv2U"
+    parse(response){
+        if (typeof response['message'] !== "undefined"){
+            return (response['message'] + `. ${this.state.amount} SGD was successfully transferred to Payee ID ${this.state.payeeID}.`);
+        } else {
+            var errorCode = response['statusCode'].toString()
+            if (errorCode == 400){
+                if (this.state.payeeID != 22) {
+                    return ("Please only use 22 as Payee ID.");
+                }
+            } else {
+                return ("Error " + errorCode + ": " + response['body']);
             }
-        })
-        .then(response => response.json())
-        .then(response => {
-            this.setState({
-                custID: response['custID'],
-                accountKey: response['accountKey']
-            })
-        })
-        .catch(err => {console.log(err)});
+        }
     }
 
     create(e) {
@@ -48,12 +46,19 @@ class addTransaction extends React.Component{
             "headers": {
                 'x-api-key': "ykOwd1IKUR3bX1I7O3yWx6QomMSqTOrG2cKUdzhg"
             },
-            "body": this.state
+            "body": JSON.stringify({
+                custID: this.state.custID,
+                accountKey: this.state.accountKey,
+                payeeID: this.state.payeeID,
+                amount: this.state.amount,
+                eGift: this.state.eGift,
+                message: this.state.message
+            })
         })
-        .then(response => response.json)
+        .then(response => response.json())
         // TODO: Display success message, maybe redirect to homepage
         .then(response => {
-            console.log(response)
+            window.alert(this.parse(response))
         })
         // TODO: Display error, do not redirect
         .catch(err => {
@@ -71,40 +76,39 @@ class addTransaction extends React.Component{
                 <div className="row justify-content-center">
                     <div className="col-md-8">
                         <h1 className="display-4 text-center">
-                            Add a Transaction
+                            Make a Transaction
                         </h1>
                         <form className="d-flex flex-column">
                             <label htmlFor="name">
-                                Payee ID:
+                                Payee ID: (Please only enter 22)
                                 <input 
                                     name="payeeID"
                                     id="payeeID"
-                                    type="text"
+                                    type="number"
                                     className="form-control"
                                     value={this.state.name}
-                                    onChange={(e) => this.handleChange({payeeID: e.target.value})}
+                                    onChange={(e) => this.handleChange({payeeID: parseInt(e.target.value)})}
                                     required
                                 />
                             </label>
                             <label htmlFor="amount">
-                                Amount to send:
+                                Amount to send (SGD):
                                 <input 
                                     name="amount"
                                     id="amount"
-                                    type="text"
+                                    type="number"
                                     className="form-control"
                                     value={this.state.name}
-                                    onChange={(e) => this.handleChange({amount: e.target.value})}
+                                    onChange={(e) => this.handleChange({amount: parseFloat(e.target.value)})}
                                     required
                                 />
                             </label>
-                            {/* TODO: make this a yes/no button */}
                             <label htmlFor="gift">
-                                Is this a gift?:
+                                Is this an eGift?: &nbsp;
                                 <input
                                     name="This is an eGift"
                                     type="checkbox"
-                                    onChange={(e) => this.handleChange({eGift: e.target.value})}
+                                    onChange={(e) => this.handleChange({eGift: e.target.value === "on" ? true : false})}
                                 />
                             </label>
                             <label htmlFor="msg">

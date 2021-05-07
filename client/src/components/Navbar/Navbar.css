@@ -1,0 +1,145 @@
+body {
+	margin: 0;
+	padding: 0;
+	position: relative;
+	width: auto;
+}
+body #page {
+	margin: 0;
+	overflow: hidden;
+	padding: 0;
+	width: auto;
+}
+a {
+	text-decoration: none;
+	outline: none;
+}
+a:active {
+	background: none;
+}
+img {
+	border: none;
+}
+/*-------------------------------------------FONTS---------------------------------------------*/
+@font-face {
+	font-family: 'roboto-regular-webfont';
+	src: url('./fonts/roboto-regular-webfont.eot');
+	src: url('./fonts/roboto-regular-webfont.woff') format('woff'), url('./fonts/roboto-regular-webfont.ttf') format('truetype'), url('./fonts/roboto-regular-webfont.svg') format('svg');
+}
+@font-face {
+	font-family: 'quicksand-bold-webfont';
+	src: url('./fonts/quicksand-bold-webfont.eot');
+	src: url('./fonts/quicksand-bold-webfont.woff') format('woff'), url('./fonts/quicksand-bold-webfont.ttf') format('truetype'), url('./fonts/quicksand-bold-webfont.svg') format('svg');
+}
+@font-face {
+	font-family: 'magra-bold-webfont';
+	src: url('./fonts/magra-bold-webfont.eot');
+	src: url('./fonts/magra-bold-webfont.woff') format('woff'), url('./fonts/magra-bold-webfont.ttf') format('truetype'), url('./fonts/magra-bold-webfont.svg') format('svg');
+}
+@font-face {
+	font-family: 'lato-regular-webfont';
+	src: url('./fonts/lato-regular-webfont.eot');
+	src: url('./fonts/lato-regular-webfont.woff') format('woff'), url('./fonts/lato-regular-webfont.ttf') format('truetype'), url('./fonts/lato-regular-webfont.svg') format('svg');
+}
+@font-face {
+	font-family: 'lato-bold-webfont';
+	src: url('./fonts/lato-bold-webfont.eot');
+	src: url('./fonts/lato-bold-webfont.woff') format('woff'), url('./fonts/lato-bold-webfont.ttf') format('truetype'), url('./fonts/lato-bold-webfont.svg') format('svg');
+}
+/*----------------------------------------header-styles---------------------------------------*/
+#header {
+	background-color: #eeebec;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	width: 100%;
+}
+#header div {
+	margin: 0 auto;
+	max-width: 940px;
+	overflow: hidden;
+	padding: 41px 10px 27px;
+}
+#header div a.logo {
+	float: left;
+	margin: 0 0 0 29px;
+	padding: 0;
+	width: auto;
+}
+#header div a.logo img {
+	display: block;
+	margin: 0;
+	padding: 0;
+	width: auto;
+}
+#header div ul {
+	display: inline-block;
+	float: right;
+	list-style: none outside none;
+	margin: 0 auto;
+	padding: 17px 0 0;
+	text-align: center;
+	width: 1000px;
+}
+#header div ul li {
+	display: inline-block;
+	*float: left; /* Needed for IE7 and old versions */
+	margin: 0 35px;
+	padding: 0;
+	position: relative;
+	width: auto;
+}
+#header div ul li a {
+	color: #7a6666;
+	font-family: lato-regular-webfont;
+	font-size: 15px;
+	font-weight: normal;
+	line-height: 15px;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	text-transform: uppercase;
+}
+#header div ul li.selected a, #header div ul li.selected a:hover {
+	color: #cb3362;
+}
+#header div ul li a:hover, #header div ul li.menu:hover ul li a {
+	color: #c8c10d;
+}
+#header div ul li ul li a {
+	color: #cb3362;
+	font-family: lato-regular-webfont;
+	font-size: 15px;
+	font-weight: normal;
+	line-height: 15px;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	text-transform: uppercase;
+}
+#header div ul li.menu {
+	min-height: 35px;
+	z-index: 80;
+}
+#header div ul li.menu ul {
+	display: block;
+	float: none;
+	left: -99999px;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 24px;
+	width: 106px;
+	z-index: 90;
+}
+#header div ul li.menu:hover ul.primary, #header div ul li.menu ul#selected.primary {
+	left: -30px;
+}
+#header div ul li.menu:hover ul.secondary, #header div ul li.menu ul#selected.secondary {
+	left: -27px;
+}
+#header div ul li.menu ul li {
+	float: none;
+	margin: 0;
+	padding: 0;
+}
