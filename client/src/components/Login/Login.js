@@ -11,19 +11,19 @@ const Login = () => {
     const [password, setPass] = useState("");
     const [check, setCheck] = useState(false);
     let history = useHistory();
-    useEffect(()=>{
-        async function checkRememberMe(){
-            try{
-                const res = await axios.post('/api/checkRememberMe');
-                if(res===200){
+    // useEffect(()=>{
+    //     async function checkRememberMe(){
+    //         try{
+    //             const res = await axios.post('/api/checkRememberMe');
+    //             if(res===200){
                     
-                }
-            }
-            catch(err){
-            }
-        }
-        checkRememberMe();
-    },[])
+    //             }
+    //         }
+    //         catch(err){
+    //         }
+    //     }
+    //     checkRememberMe();
+    // },[])
     const handleSubmit = async (e) => {
         e.preventDefault();
         const data = {
