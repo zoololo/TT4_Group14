@@ -42,6 +42,12 @@ const Login = () => {
             if(err.response.status===403){
                 alert("Credentials entered are invalid!");
             }
+            else if(err.response.status===401){
+                alert("Missing Credentials!");
+            }
+            else{
+                alert(err.message);
+            }
         }
     }
 

@@ -2,7 +2,8 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import React from 'react';
 
 import './App.css';
-import Login from './Login/Login'
+import Login from './Login/Login';
+import Footer from './Footer/Footer';
 import PrivateRoute from './PrivateRoute';
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
         <PrivateRoute exact path="/" />
       </Switch>
       {/* Footer Component */}
-      {/* <Footer /> */}
+      <Footer />
     </Router>
   );
 }
