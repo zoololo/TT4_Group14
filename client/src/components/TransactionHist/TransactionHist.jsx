@@ -17,9 +17,8 @@ class TransactionHist extends Component {
         this.showTransactions = this.showTransactions.bind(this);
     };
     
-
     getBalance = () => {
-        axios.get('https://ipllrj2mq8.execute-api.ap-southeast-1.amazonaws.com/techtrek/accounts', {
+        axios.post('https://ipllrj2mq8.execute-api.ap-southeast-1.amazonaws.com/techtrek/accounts', {
             headers: {
                 'x-api-key': `ykOwd1IKUR3bX1I7O3yWx6QomMSqTOrG2cKUdzhg`
             }
@@ -29,14 +28,10 @@ class TransactionHist extends Component {
     }
 
     getTransactionHistory = () => {
-        axios.get('https://ipllrj2mq8.execute-api.ap-southeast-1.amazonaws.com/techtrek/transactions/view', {
+        axios.post('https://ipllrj2mq8.execute-api.ap-southeast-1.amazonaws.com/techtrek/transactions/view', {
             headers: {
                 'x-api-key': `ykOwd1IKUR3bX1I7O3yWx6QomMSqTOrG2cKUdzhg`
-            },
-            data : JSON.stringify({
-                "userName": "Group14",
-                "userPass": "BgQ%o_rF0$Fkv2U"
-              })
+            }
         })
             .then(res => {
                 this.setState({ transactionHistory: res.data })
@@ -51,7 +46,7 @@ class TransactionHist extends Component {
     }
 
     redirectToHome = () => {
-        this.props.history.push('/home');
+        this.props.history.push('/');
     }
 
     showTransactions = () => {
@@ -77,7 +72,7 @@ class TransactionHist extends Component {
                     </thead>
 
                     <tbody>
-                        {this.state.transactionHistory.map(transactionHistory => <tr key={transactionHistory._id}><td>{transactionHistory.date}</td><td>{transactionHistory.amount}</td></tr>)}
+                        {this.state.transactionHistory.map(transactionHistory => <tr key={transactionHistory.custID}><td>{transactionHistory.date}</td><td>{transactionHistory.amount}</td></tr>)}
                     </tbody>
 
                 </table>
