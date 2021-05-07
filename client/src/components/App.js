@@ -28,6 +28,11 @@ function App() {
         TransactionHist / >
         <
         /Route>
+
+        <
+        /Switch> < /
+        div > <
+        /Router>
     );
 }
 
