@@ -48,6 +48,7 @@ const Login = () => {
                 localStorage.setItem('lastName', res.data.lastName);
                 localStorage.setItem('nric', res.data.nric);
                 localStorage.setItem('phoneNumber', res.data.phoneNumber);
+                history.push('/addTransaction');
                 // for remember me function, node.js and express used to set cookie containing jwt of userName and userPass. 
                 // each time a user opens the loginPage, cookie is verified with jwt.verify and userName and userPass is obtained from payload 
                 // and used to populate the username and password fields

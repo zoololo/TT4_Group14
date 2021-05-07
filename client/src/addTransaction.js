@@ -1,4 +1,4 @@
-'use strict';
+import React, {Component} from 'react';
 
 class addTransaction extends React.Component{
     constructor(props){
@@ -15,8 +15,6 @@ class addTransaction extends React.Component{
         };
         
         this.create = this.create.bind(this);
-        this.update = this.update.bind(this);
-        this.delete = this.delete.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -135,5 +133,4 @@ class addTransaction extends React.Component{
     }
 }
 
-let domContainer = document.querySelector("#addTransaction");
-ReactDOM.render(<addTransaction/>, domContainer);
+export default addTransaction;
