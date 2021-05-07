@@ -9,7 +9,6 @@ import PrivateRoute from './PrivateRoute';
 import Header from './Navbar/Header';
 import AccountDetails from './AccountDetails/AccountDetails';
 import TransactionHist from './TransactionHist/TransactionHist';
-import 
 
 
 function App() {
@@ -26,7 +25,6 @@ function App() {
         <Route exact path="/">
           <Redirect to="/LoginPage" />
         </Route>
-        <PrivateRoute exact path="/home/:id" />
         <PrivateRoute exact path="/addTransaction" component={addTransaction} />
         <PrivateRoute exact path="/transactionHist" component={TransactionHist} />
         <PrivateRoute exact path="/AccountDetails" component={AccountDetails}/>
