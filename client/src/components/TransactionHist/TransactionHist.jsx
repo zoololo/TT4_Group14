@@ -1,48 +1,80 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
+import {toast } from 'react-toastify';
+
+
 
 class TransactionHist extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            balance: null,
             transactionHistory: [],            
             showTable: false
         }
+
+          
         this.redirectToHome = this.redirectToHome.bind(this);
-        this.getBalance = this.getBalance.bind(this);
         this.getTransactionHistory = this.getTransactionHistory.bind(this);
         this.renderContent = this.renderContent.bind(this);
         this.showTransactions = this.showTransactions.bind(this);
     };
-    
-    getBalance = () => {
-        axios.post('https://ipllrj2mq8.execute-api.ap-southeast-1.amazonaws.com/techtrek/accounts', {
-            headers: {
-                'x-api-key': `ykOwd1IKUR3bX1I7O3yWx6QomMSqTOrG2cKUdzhg`
-            }
-        })
-            .then(res => this.setState({ balance: res.data.availableBal }))
-            .catch(err => console.log(err))
-    }
 
-    getTransactionHistory = () => {
-        axios.post('https://ipllrj2mq8.execute-api.ap-southeast-1.amazonaws.com/techtrek/transactions/view', {
+    checkAmountBalance = async () => {
+        const custID = this.state.custID;
+        const payload = { 
+            custID : parseInt(localStorage.getItem('custID')),
+            accountKey : localStorage.getItem('accountKey')
+        }
+        try {
+          const res = await axios.post('https://ipllrj2mq8.execute-api.ap-southeast-1.amazonaws.com/techtrek/accounts', payload, {
             headers: {
-                'x-api-key': `ykOwd1IKUR3bX1I7O3yWx6QomMSqTOrG2cKUdzhg`
-            }
-        })
-            .then(res => {
-                this.setState({ transactionHistory: res.data })
-            })
-            .catch(err => {
-                console.log(err);
-            })
-    }
+                'x-api-key' : "ykOwd1IKUR3bX1I7O3yWx6QomMSqTOrG2cKUdzhg"
+            },
+          });
+          if (res.status === 200) {
+            const accounts = res.data;
+            this.setState({ accounts });
+            console.log(this.state.accounts);
+          }
+        } catch (err) {
+          console.log('AccountDetails-checkAmountBalance err: ' + err);
+          if (err.message === 'Request failed with status code 401') {
+            toast.error('Access token expired. Please sign out and login again');
+          }
+        }
+      };
 
     componentDidMount() {
-        this.getBalance();
+        this.setState({ custID: localStorage.getItem('custID')}, () => {
+          this.checkAmountBalance();
+        });
+      }
+
+
+    getTransactionHistory = async () => {
+        //const custID = this.state.custID;
+        const payload = { 
+            custID : parseInt(localStorage.getItem('custID')),
+            accountKey : localStorage.getItem('accountKey')
+        }
+        try {
+          const res = await axios.post('https://ipllrj2mq8.execute-api.ap-southeast-1.amazonaws.com/techtrek/transactions/view', payload, {
+            headers: {
+                'x-api-key' : "ykOwd1IKUR3bX1I7O3yWx6QomMSqTOrG2cKUdzhg"
+            },
+          });
+          if (res.status === 200) {
+            const transactionHistory = res.data;
+            this.setState({ transactionHistory });
+            console.log(this.state.transactionHistory);
+          }
+        } catch (err) {
+          console.log('AccountDetails-checkAmountBalance err: ' + err);
+          if (err.message === 'Request failed with status code 401') {
+            toast.error('Access token expired. Please sign out and login again');
+          }
+        }
     }
 
     redirectToHome = () => {
@@ -103,7 +135,6 @@ class TransactionHist extends Component {
     render() {
         return (
             <div>
-                <h1>Account Balance: {this.state.balance}</h1>
                 <br />
                 <button onClick={this.showTransactions}>Show Transaction History</button>
                 <br />
