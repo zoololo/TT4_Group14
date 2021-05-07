@@ -19,22 +19,22 @@ const Navbar = () => {
         <div id="header">
             <ul id="navigation">
                 <li className="selected">
-                    <Link to="/home">
+                    <Link to="/AccountDetails">
                         Home
                     </Link>
                 </li>
                 <li className="menu">
-                    <Link to="/home">
+                    <Link to="/transactionHist">
                         View Transaction History
                     </Link>
                 </li>
                 <li className="menu">
-                    <Link to="/home">
+                    <Link to="/addTransaction">
                         Add Transaction
                     </Link>
                 </li>
                 <li>
-                    <Link to="/home">
+                    <Link to="/AccountDetails">
                         View Account Details
                     </Link>
                 </li>
