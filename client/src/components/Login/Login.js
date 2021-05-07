@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
@@ -11,7 +11,19 @@ const Login = () => {
     const [password, setPass] = useState("");
     const [check, setCheck] = useState(false);
     let history = useHistory();
-
+    useEffect(()=>{
+        async function checkRememberMe(){
+            try{
+                const res = await axios.post('/api/checkRememberMe');
+                if(res===200){
+                    
+                }
+            }
+            catch(err){
+            }
+        }
+        checkRememberMe();
+    },[])
     const handleSubmit = async (e) => {
         e.preventDefault();
         const data = {
@@ -36,6 +48,9 @@ const Login = () => {
                 localStorage.setItem('lastName', res.data.lastName);
                 localStorage.setItem('nric', res.data.nric);
                 localStorage.setItem('phoneNumber', res.data.phoneNumber);
+                // for remember me function, node.js and express used to set cookie containing jwt of userName and userPass. 
+                // each time a user opens the loginPage, cookie is verified with jwt.verify and userName and userPass is obtained from payload 
+                // and used to populate the username and password fields
             }
         }
         catch (err) {
@@ -68,7 +83,7 @@ const Login = () => {
                     <Form.Control
                         autoFocus type="text"
                         size="lg"
-                        placeholder={username}
+                        value={username}
                         onChange={updateUser}
                         required
                     />
@@ -77,6 +92,7 @@ const Login = () => {
                     <Form.Label>Password</Form.Label>
                     <Form.Control
                         autoFocus type="password"
+                        value={password}
                         size="lg"
                         onChange={updatePass}
                         required
