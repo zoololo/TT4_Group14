@@ -6,7 +6,7 @@ import Login from './Login/Login';
 import addTransaction from '../addTransaction'
 import Footer from './Footer/Footer';
 import PrivateRoute from './PrivateRoute';
-import Header from './Navbar/Header';
+import Header from './Header/Header';
 import AccountDetails from './AccountDetails/AccountDetails';
 import TransactionHist from './TransactionHist/TransactionHist';
 

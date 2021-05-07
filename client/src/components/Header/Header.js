@@ -11,10 +11,10 @@ const Header = () => {
     let history = useHistory();
 
     const handleLogout = () => {
-        const remember =  localStorage.getItem('rememberme')
+        const rememberme = localStorage.getItem('rememberme');
         localStorage.clear();
         sessionStorage.clear();
-        localStorage.setItem('rememberme', remember);
+        localStorage.setItem('rememberme',rememberme);
         history.push("/");
     }
 
@@ -28,16 +28,16 @@ const Header = () => {
                         Home
                     </Nav.Link>
                     <NavDropdown title="Actions" id="basic-nav-dropdown">
-                        <NavDropdown.Item to='/AccountDetails' as={Link}>
-                                Account Balance
+                        <NavDropdown.Item to='/addTransaction' as={Link}>
+                               Add Transaction
                         </NavDropdown.Item>
                         <NavDropdown.Divider />
                         <NavDropdown.Item to='/transactionHist' as={Link}>
                                 Transaction History
                         </NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item to='/addTransaction' as={Link}>
-                                Make Transaction
+                        <NavDropdown.Item to='/AccountDetails' as={Link}>
+                                Account Details
                         </NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
