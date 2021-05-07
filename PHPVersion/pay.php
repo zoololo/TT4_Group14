@@ -16,12 +16,12 @@
 						<a href="index.php">Log Out</a>
 					</li>
 					<li class="menu">
-						<a href="about.html">View Transaction History</a>
-					</li>
-					<li class="menu">
-						<a href="pay.php">Add Transaction</a>
+						<a href="viewTransactions.php">View Transaction History</a>
 					</li>
 					<li class="selected">
+						<a href="pay.php">Add Transaction</a>
+					</li>
+					<li class="menu">
 						<a href="account2.php">View Account Balance</a>
 					</li>
 				</ul>

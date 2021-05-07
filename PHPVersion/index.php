@@ -16,7 +16,7 @@
 						<a href="index.php">Login</a>
 					</li>
 					<li class="menu">
-						<a href="about.html">View Transaction History</a>
+						<a href="viewTransactions.php">View Transaction History</a>
 					</li>
 					<li class="menu">
 						<a href="pay.php">Add Transaction</a>

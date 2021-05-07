@@ -15,13 +15,13 @@
 					<li class="menu">
 						<a href="index.php">Log Out</a>
 					</li>
-					<li class="menu">
+					<li class="selected">
 						<a href="viewTransactions.php">View Transaction History</a>
 					</li>
 					<li class="menu">
 						<a href="pay.php">Add Transaction</a>
 					</li>
-					<li class="selected">
+					<li class="menu">
 						<a href="account2.php">View Account Balance</a>
 					</li>
 				</ul>
@@ -39,7 +39,7 @@
 							];
 							
 							curl_setopt_array($curl, array(
-								CURLOPT_URL => 'https://ipllrj2mq8.execute-api.ap-southeast-1.amazonaws.com/techtrek/accounts',
+								CURLOPT_URL => 'https://ipllrj2mq8.execute-api.ap-southeast-1.amazonaws.com/techtrek/transactions/view',
 								CURLOPT_RETURNTRANSFER => true,
 								CURLOPT_ENCODING => '',
 								CURLOPT_MAXREDIRS => 10,
@@ -64,20 +64,9 @@
 							
 							curl_close($curl);
 
-							$response = json_decode($response, true);
-							// var_dump ($response);
+							// $response = json_decode($response, true);
+							var_dump ($response);
 						?>
-						<h1><?php echo ($response[0]['accountName']);?> </h1>
-						<h2>Account Number: $<?php echo ($response[0]['accountNumber']);?> </h2>
-						<h2>Account Balance: $<?php echo ($response[0]['availableBal']);?> </h2>
-
-						<h1><?php echo ($response[1]['accountName']);?> </h1>
-						<h2>Account Number: $<?php echo ($response[1]['accountNumber']);?> </h2>
-						<h2>Account Balance: $<?php echo ($response[1]['availableBal']);?> </h2>
-
-						<h1><?php echo ($response[2]['accountName']);?> </h1>
-						<h2>Account Number: $<?php echo ($response[2]['accountNumber']);?> </h2>
-						<h2>Account Balance: $<?php echo ($response[2]['availableBal']);?> </h2>
 					</div>
 				</div>
 			</div>
