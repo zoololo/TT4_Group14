@@ -20,7 +20,7 @@ class addTransaction extends React.Component{
         this.handleChange = this.handleChange.bind(this);
     }
 
-    // Retrieve the user's accounts (e.g. savings, multiplier account)
+    // Retrieve the user's `custID` and `accountKey`, given userName, Pass
     componentDidMount(){
         fetch("https://ipllrj2mq8.execute-api.ap-southeast-1.amazonaws.com/techtrek/login",{
             "method": "POST",
@@ -53,9 +53,11 @@ class addTransaction extends React.Component{
             "body": this.state
         })
         .then(response => response.json)
+        // TODO: Display success message, maybe redirect to homepage
         .then(response => {
             console.log(response)
         })
+        // TODO: Display error, do not redirect
         .catch(err => {
             console.log(err);
         });
@@ -101,14 +103,10 @@ class addTransaction extends React.Component{
                             {/* TODO: make this a yes/no button */}
                             <label htmlFor="gift">
                                 Is this a gift?:
-                                <input 
-                                    name="gift"
-                                    id="gift"
-                                    type="text"
-                                    className="form-control"
-                                    value={this.state.name}
+                                <input
+                                    name="This is an eGift"
+                                    type="checkbox"
                                     onChange={(e) => this.handleChange({eGift: e.target.value})}
-                                    required
                                 />
                             </label>
                             <label htmlFor="msg">
@@ -137,5 +135,5 @@ class addTransaction extends React.Component{
     }
 }
 
-let domContainer = document.querySelector("#App");
+let domContainer = document.querySelector("#addTransaction");
 ReactDOM.render(<addTransaction/>, domContainer);
