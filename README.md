@@ -38,3 +38,7 @@ axios(config)
 .catch(function (error) {
   console.log(error);
 });
+
+API_KEY=ykOwd1IKUR3bX1I7O3yWx6QomMSqTOrG2cKUdzhg
+USERNAME=Group14
+PASSWORD=BgQ%o_rF0$Fkv2U
