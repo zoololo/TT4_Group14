@@ -7,33 +7,28 @@ import TransactionHist from './TransactionHist/TransactionHist';
 
 
 function App() {
-    return ( < Router > { /* Header Component */ } < Switch >
+    return ( <
+        Router >
         <
-        Route path = "/" / >
+        div class = "center-align" >
         <
-        /Switch> { / * Main body Component - Make Routes here * / } <Switch > <
-        Route exact path = "/loginPage" / >
-        <
-        Route exact path = "/" > { /* <Redirect to="/LoginPage" /> */ } <
-        div > delete me after adding your own routes, this is just to test the page renders < /div> < /
-        Route > { /* Add Private routes for all pages only accessible after login */ } <
-        Route exact path = "/transactionhist" > { /* <Redirect to="/LoginPage" /> */ } <
-        div > TransactionHist < /div> < /
-        Route > < /div><
-        PrivateRoute exact path = "/" / >
-        <
-        PrivateRoute exact path = "/" / >
+        Switch >
+
         <
         Route exact = { true }
         path = '/' >
         <
-        Login / >
-        <
-        /Route> < /
-        Switch > { / * Footer Component * / } {
-            / * < Footer / > * / } < /
-            Router >
-        );
-    }
+        h3 > This line is from App file by
+        default < /h3> /
+        Route >
 
-    export default App;
+        <
+        Route path = "/transactionhist" >
+        <
+        TransactionHist / >
+        <
+        /Route>
+    );
+}
+
+export default App;
