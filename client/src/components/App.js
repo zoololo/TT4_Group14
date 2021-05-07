@@ -16,14 +16,10 @@ function App() {
 
         <
         Route exact = { true }
-        path = '/' >
-        <
-        h3 > This line is from App file by
-        default < /h3> /
-        Route >
-
-        <
-        Route path = "/transactionhist" >
+        path = '/' > < h3 > This line is from App file by
+        default < /h3> < /
+        Route > <
+        Route path = "/transactionHist" >
         <
         TransactionHist / >
         <
