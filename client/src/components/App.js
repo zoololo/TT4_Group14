@@ -6,6 +6,8 @@ import Login from './Login/Login';
 import addTransaction from '../addTransaction'
 import Footer from './Footer/Footer';
 import PrivateRoute from './PrivateRoute';
+import Navbar from './Navbar/Navbar';
+import AccountDetails from './AccountDetails/AccountDetails';
 import TransactionHist from './TransactionHist/TransactionHist';
 
 
@@ -14,7 +16,8 @@ function App() {
     <Router>
       {/* Header Component */}
       <Switch>
-        <Route path="/" />
+        <Route path="/loginPage" />
+        <Route path="/" component={Navbar} />
       </Switch>
       {/* Main body Component - Make Routes here */}    
       <Switch>
@@ -25,7 +28,7 @@ function App() {
         <Route exact path="/addTransaction" component={addTransaction} />
         <Route exact path="/transactionHist" component={TransactionHist} />
         {/* Add Private routes for all pages only accessible after login */}
-        <PrivateRoute exact path="/" />
+        <PrivateRoute exact path="/AccountDetails" component={AccountDetails}/>
         <PrivateRoute exact path="/" />
       </Switch>
       {/* Footer Component */}
