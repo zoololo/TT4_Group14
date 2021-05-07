@@ -17,10 +17,11 @@ function App() {
         <Route exact path="/loginPage" />       
         <Route exact path="/">
           {/* <Redirect to="/LoginPage" /> */}
-          <div>delete me after adding your own routes, this is just to test the page renders</div>
+          <div></div>
         </Route>
         {/* Add Private routes for all pages only accessible after login */}
-        <PrivateRoute exact path="/" />
+        <PrivateRoute exact path="/balance" />
+        Balance
         <PrivateRoute exact path="/" />
       </Switch>
       {/* Footer Component */}
