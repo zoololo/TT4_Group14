@@ -15,7 +15,6 @@ const AccountDetails = () => {
     if (localStorage.getItem("accountKey")) {
 
         const key = sessionStorage.getItem("accountKey");
-
  
 
         const checkBalance = async (key) => {
@@ -27,7 +26,8 @@ const AccountDetails = () => {
                 accountKey : localStorage.getItem('accountKey')}
 
             const response = await axios.post("https://ipllrj2mq8.execute-api.ap-southeast-1.amazonaws.com/techtrek/accounts", payload, { headers : {'x-api-key' : "ykOwd1IKUR3bX1I7O3yWx6QomMSqTOrG2cKUdzhg"}})
-
+            console.log(response);
+            console.log(payload);
             setBankBalance(response.data.bankBalance);
 
         }

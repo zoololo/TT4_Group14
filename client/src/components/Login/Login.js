@@ -47,6 +47,7 @@ const Login = () => {
                     const remembermeToken = jwt.sign({ data }, "someSecret");
                     localStorage.setItem('rememberme', remembermeToken);
                 }
+                localStorage.setItem('isLoggedIn', true);
                 localStorage.setItem('accountKey', res.data.accountKey);
                 localStorage.setItem('address', res.data.address);
                 localStorage.setItem('age', res.data.age);
