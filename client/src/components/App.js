@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import React from 'react';
 
 import './App.css';
+import Login from './Login/Login'
 import PrivateRoute from './PrivateRoute';
 
 function App() {
@@ -13,10 +14,9 @@ function App() {
       </Switch>
       {/* Main body Component - Make Routes here */}    
       <Switch>
-        <Route exact path="/loginPage" />       
+        <Route exact path="/loginPage" component={Login}/>       
         <Route exact path="/">
-          {/* <Redirect to="/LoginPage" /> */}
-          <div>delete me after adding your own routes, this is just to test the page renders</div>
+          <Redirect to="/LoginPage" />
         </Route>
         {/* Add Private routes for all pages only accessible after login */}
         <PrivateRoute exact path="/" />
