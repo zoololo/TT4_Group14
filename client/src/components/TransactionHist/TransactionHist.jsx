@@ -81,7 +81,7 @@ class TransactionHist extends Component {
 
         var tableNothing = (
             <div>
-                <h6>Click on "Show Transaction History" to see your previous transactions!</h6>
+                <h6>Click on "Show Transaction History" to see view your previous transactions</h6>
             </div>
         )
 
