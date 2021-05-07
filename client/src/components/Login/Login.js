@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import jwt from 'jsonwebtoken';
 import './Login.css'
 
 
@@ -11,24 +12,27 @@ const Login = () => {
     const [password, setPass] = useState("");
     const [check, setCheck] = useState(false);
     let history = useHistory();
-    // useEffect(()=>{
-    //     async function checkRememberMe(){
-    //         try{
-    //             const res = await axios.post('/api/checkRememberMe');
-    //             if(res===200){
-                    
-    //             }
-    //         }
-    //         catch(err){
-    //         }
-    //     }
-    //     checkRememberMe();
-    // },[])
+
+    useEffect(() => {
+        async function checkRememberMe() {
+            const rem = localStorage.getItem('rememberme');
+            if (!rem) { return null }
+            jwt.verify(rem, "someSecret", (err, payload) => {
+                if (err) { return console.log(err.message) }
+                setUser(payload.data.userName);
+                setPass(payload.data.userPass);
+            });
+
+        }
+        checkRememberMe();
+    }, []);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const data = {
             userName: username,
-            userPass: password
+            userPass: password,
+            check
         };
         const config = {
             headers: {
@@ -39,6 +43,10 @@ const Login = () => {
             const res = await axios.post('https://ipllrj2mq8.execute-api.ap-southeast-1.amazonaws.com/techtrek/login', data, config);
             if (res.status === 200) {
                 console.log(res);
+                if (check === true) {
+                    const remembermeToken = jwt.sign({ data }, "someSecret");
+                    localStorage.setItem('rememberme', remembermeToken);
+                }
                 localStorage.setItem('accountKey', res.data.accountKey);
                 localStorage.setItem('address', res.data.address);
                 localStorage.setItem('age', res.data.age);
@@ -55,13 +63,13 @@ const Login = () => {
             }
         }
         catch (err) {
-            if(err.response.status===403){
+            if (err.response.status === 403) {
                 alert("Credentials entered are invalid!");
             }
-            else if(err.response.status===401){
+            else if (err.response.status === 401) {
                 alert("Missing Credentials!");
             }
-            else{
+            else {
                 alert(err.message);
             }
         }
