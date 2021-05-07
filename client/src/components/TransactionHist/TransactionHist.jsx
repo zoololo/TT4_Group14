@@ -16,6 +16,7 @@ class TransactionHist extends Component {
         this.renderContent = this.renderContent.bind(this);
         this.showTransactions = this.showTransactions.bind(this);
     };
+    
 
     getBalance = () => {
         axios.get('https://ipllrj2mq8.execute-api.ap-southeast-1.amazonaws.com/techtrek/accounts', {
@@ -31,7 +32,11 @@ class TransactionHist extends Component {
         axios.get('https://ipllrj2mq8.execute-api.ap-southeast-1.amazonaws.com/techtrek/transactions/view', {
             headers: {
                 'x-api-key': `ykOwd1IKUR3bX1I7O3yWx6QomMSqTOrG2cKUdzhg`
-            }
+            },
+            data : JSON.stringify({
+                "userName": "Group14",
+                "userPass": "BgQ%o_rF0$Fkv2U"
+              })
         })
             .then(res => {
                 this.setState({ transactionHistory: res.data })
