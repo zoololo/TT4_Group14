@@ -65,7 +65,7 @@
 							curl_close($curl);
 
 							// $response = json_decode($response, true);
-							var_dump ($response);
+							echo ($response);
 						?>
 					</div>
 				</div>
